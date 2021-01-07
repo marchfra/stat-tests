@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="stat_tests-marchfra",
-    version="0.0.2.a1",
+    version="0.0.3.a1",
     author="marchfra",
     author_email="marchfra1@gmail.com",
     description="A package that performs statistical tests",
