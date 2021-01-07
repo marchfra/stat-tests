@@ -2,12 +2,14 @@ import uncertainties
 import sympy as sym
 
 
-def z_test(value : uncertainties.UFloat, alpha : float = 0.05) -> str:
+def z_test(value : uncertainties.UFloat, alpha : float = 0.05) -> bool:
 	'''
 	Performs a Z test on a value with 0
 
-	:param value: value to test compatibility wit 0
-	:param alpha: significance value
+	:param value: value to test compatibility wit 0. Has to be an instance of uncertainties.UFloat
+	:param alpha: significance value. Defaults to 5%
+
+	returns True if the input value is compatible with 0 with the specified significance, False otherwise
 	'''
 
 	# This function returns the probability of obtaining a Z value greater than the one obtained
@@ -18,15 +20,20 @@ def z_test(value : uncertainties.UFloat, alpha : float = 0.05) -> str:
 
 	# Check wether the input type is right
 	try:
-		assert isinstance(value, uncertainties.UFloat), "The functions accepts UFloat input only"
+		assert isinstance(value, uncertainties.UFloat), f"The function accepts UFloat input only; you tried to pass {type(value)}"
+		if alpha > 1:
+			raise ValueError(f"The significance value should be smaller than 1; you entered {alpha}")
 	except AssertionError as error:
 		print(error)
 		return AssertionError
+	except ValueError as error:
+		print(error)
+		return ValueError
 	else:
 		# The Z test
 		Z = abs(value.n / value.s)
 		p = float(P(Z).evalf())
 		if p > alpha:
-			return f'The input value {value} is compatible with 0 with a significance of {alpha*100}%'
+			return True
 		else:
-			return f'The input value {value} is not compatible with 0 with a significance of {alpha*100}%'
+			return False
