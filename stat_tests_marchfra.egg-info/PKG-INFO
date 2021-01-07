@@ -8,7 +8,7 @@ Author-email: marchfra1@gmail.com
 License: UNKNOWN
 Description: # Statistical test package
         
-        The aim of this package is to provide a set of functions to perform statistical tests.
+        The aim of this package is to provide a set of functions to perform statistical tests.\
         At the moment only the Z test has been implemented, but more are on the way.
 Platform: UNKNOWN
 Classifier: Programming Language :: Python :: 3
